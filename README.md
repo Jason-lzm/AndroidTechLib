@@ -4,10 +4,10 @@
 
 - [ ] [Android基础](https://github.com/Jason-lzm/AndroidTechLib/blob/master/Android/Android%E5%9F%BA%E7%A1%80.md)
 - [x] Android内存泄露与内存溢出总结
-- [ ] Android性能优化
+- [x] Android性能优化-UI优化与内存优化
 - [x] Handler、Looper、Message、MessageQueue基础流程分析
 - [x] ANR问题
-- [ ] 事件分发机制
+- [x] 事件分发机制
 - [ ] View的绘制
 - [x] Binder机制
 - [ ] APP启动过程

@@ -7,7 +7,7 @@
 > Android的Handler机制由四部分组成：Handler、Looper、Message、MessageQueue
 > ### Handler
 > * 功能：发送消息和处理消息，发消息可在任意线程，处理消息在Looper线程
-> ++默认构造函数会与创建此Handler的线程的Looper进行关联++
+> ++默认构造函数会与new此Handler的线程的Looper进行关联++
 _ _ _
 > ```Java
 > public Handler(Callback callback, boolean async) {
@@ -47,7 +47,8 @@ _ _ _
     }
 ```
 > ##### looper.loop()
-```
+
+```Java
 public static void loop(){
         ...
 
@@ -59,14 +60,16 @@ public static void loop(){
 
             //分发Message，target即为msg对应的Handler
             msg.target.dispatchMessage(msg);
-            
+
             ...
         }
     }
 ```
 >### MessageQueue
 >功能：消息队列，由Looper所持有，但是消息的添加是通过Handler进行；
-　　final boolean enqueueMessage(Message msg, long when) {
+
+```Java
+　　final boolean enqueueMessage (Message msg, long when) {
 
               Message p = mMessages;
 
@@ -88,7 +91,8 @@ public static void loop(){
               }
               ……
 　　}
-  
+```language
+```
 > ### Message
 > 功能：消息实体，包含消息内容和target Handler（发给哪一个Handler处理，可以是自己）
 
@@ -98,3 +102,5 @@ public static void loop(){
 > 3. Looper中用了ThreadLocal来保存当前的Looper对象，
 > 	ThreadLocal：线程局部变量，存储的变量为每个线程单独持有，其他线程不能访问，
 > 	他用一个ThreadLocalMap来保存对象，而这个map会赋值给当前Thread独有的一个成员threadlocals
+> 4. Android里的主线程为什么不会因为Looper.loop()里的死循环卡死？
+> 	因为MessageQueue为empty时，线程会被挂起，当有消息来时，就会唤醒线程处理消息
